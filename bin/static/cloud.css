@@ -1,0 +1,17 @@
+#busca-topo {
+    background-color:rgba(0,0,0,0);
+    border:none;
+    color:white;
+}
+.nav-link{
+    color:white;
+}
+#dark {
+    background-color: rgba(0,0,0,0);
+    border:none;
+    color:white;
+}
+.galeria div{
+    padding:0.1em;
+    margin: 0;
+}

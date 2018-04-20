@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <title>BuscaGame - Explore o mundo gamer</title>
+    
+    
+    <link rel="stylesheet" href="cloud.css">
+    
+    <!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+    <link href="css/navbar-top-fixed.css">
+    <link href="css/sticky-footer.css">
+    
+    <!-- Icons Link - Google Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    
+    <script src="js/jquery-3.1.1.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+ 
+    <script src="js/jquery.js"></script>
+    
+</head>
+<body class="bg-dark">
+    <script>
+    	var url = window.location.href;
+    	var titulo = url.substring(url.lastIndexOf('=') + 1);
+    	titulo = decodeURI(titulo);
+    	
+    	var ano = 2018;
+	    
+    	var url = "/jogo/"+titulo+"/"+ano+"";
+    	
+    	$.getJSON(url, function(data) {
+			
+    		$('#titulo').append(data.titulo);
+    		$('#ano').append(data.ano);
+    		$('#desc').append(data.descricao);
+    		$('#info').append(data.informacao);
+    		$('#legenda').append(data.titulo);
+    		$('#desenvolvedora').append(data.desenvolvedora);
+    		
+    	});
+    	
+    </script>
+    <nav id="topo" class="navbar navbar-expand-md navbar-dark fixed-top bg-dark border-bottom border-secondary">
+        <form class="form-inline w-100">
+            <div class="input-group w-100">
+                <div class="input-group-prepend">
+                  <div id="dark" class="input-group-text"><i class="material-icons">search</i></div>
+                </div>
+                <input id="busca-topo" class="form-control" type="text" placeholder="Buscar por titulo" aria-label="Buscar" disabled>
+            </div>
+        </form>
+          <a class="nav-link" href="http://localhost:8080/index.html">Inicio</a>
+          <a class="nav-link disabled" href="#">Recomendados</a>
+          <a class="nav-link" href="http://localhost:8080/catalogo.html">Catálogo</a>
+    </nav>
+    
+    <div class="container">
+        <div class="row d-flex justify-content-center text-white" style="padding:1em;">
+            <h1 id="titulo"></h1>
+        </div>
+        <div class="row text-white" style="margin-bottom:2em;">
+            <div class="col-md col-sm-12">
+                <figure class="figure">
+                  <img src="Blade%20Runner.jpg" class="figure-img img-fluid rounded" alt="Game Image">
+                  <figcaption class="figure-caption text-center" id="legenda"></figcaption>
+                </figure>
+                <button id="catalogar" type="button" class="btn btn-primary w-100">+ Catalogo</button>
+            </div>
+            <div class="col-md col-sm-12">
+                <h4 id="ano"></h4>
+                <h4 id="desenvolvedora">Desenvolvedora: </h4>
+                <p style="text-align:justify; color:#BDBDBD;" id="desc"></p>
+            </div>
+            <div class="col">
+                <h4>Recomendados</h4>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-12 col-md-6 text-white">
+                <div class="btn-group w-100 d-flex justify-content-center" role="group" aria-label="Basic example" style="margin-top:3em;margin-bottom:1em;">
+                    <button type="button" class="btn btn-secondary active">Imagem</button>
+                </div>
+                
+                <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                          <img class="d-block w-100" src="Blade%20Runner.jpg" alt="First slide">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-12 col-md-6 text-white">
+                	<h3 class="w-100" style="text-align:center;">Informações</h3>
+                	<p class="w-100" style="text-align:center; color:#BDBDBD;" id="info"></p>
+            </div>
+        </div>
+    </div>
+    
+    
+    <footer class="footer" style="margin-top:5em;padding-bottom:1em;">
+      <div class="container">
+        <span class="text-muted">CloudGames.</span>
+      </div>
+    </footer>
+    
+    <!-- JS Links - Bootstrap/Jquery -->
+    <script>
+        $('body').css('margin-top',$('#topo').height()+25);
+        $(window).resize(function(){
+            $('body').css('margin-top',$('#topo').height()+25);
+        });
+        
+        $('#catalogar').click(function(){
+    		var url = "/catalogar/"+titulo+"";
+    		
+    		$.getJSON(url, function(data){
+    			alert("Catalogado com sucesso");
+    		});
+    	});
+    </script>
+    
+</body>
+</html>
